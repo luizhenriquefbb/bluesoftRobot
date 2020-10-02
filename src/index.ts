@@ -31,9 +31,8 @@ interface openPageParams {
 type openPageResponse = Promise<
     {
         barcode: string;
-        NCM: string;
+        NCM: string | undefined;
     }
-    | null
 >;
 
 async function openPageAndGetNCM({ driver, productBarCode, baseUrl = BASEURL }: openPageParams): openPageResponse{
@@ -69,7 +68,10 @@ async function openPageAndGetNCM({ driver, productBarCode, baseUrl = BASEURL }: 
         console.error(error);
     }
 
-    return null;
+    return {
+        barcode: productBarCode,
+        NCM: undefined
+    };;
 }
 
 (async function main() {
